@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">u磁力</string>
+    <string name="app_internet_err">网络连接失败</string>
+    <string name="app_toExit">再次点击退出应用程序</string>
+    <string name="app_selelct_lines">切换线路</string>
+    <string name="app_main_shou">搜资源</string>
+    <string name="app_main_about">关于</string>
+    <string name="app_main_msg">公告板</string>
+    <string name="app_ok">确定</string>
+    <string name="app_cancel">取消</string>
+    <string name="app_update_title">更新提示</string>
+    <string name="app_update">更新</string>
+    <string name="app_isNew">已经是最新版</string>
+    <string name="app_check_update_err">检查更新出错</string>
+    <string name="app_copy">复制</string>
+    <string name="app_copied">已经复制到剪切板</string>
+    <string name="app_magnet">磁力</string>
+    <string name="app_size">数据大小: </string>
+    <string name="app_creattime">创建时间: </string>
+    <string name="app_clicktime">热    度: </string>
+    <string name="app_open_Xunlei">打开迅雷</string>
+    <string name="app_err_to_changeLine">资源解析异常，请稍后或切换线路重试</string>
+    <string name="app_need_input">贤者，输入点东西</string>
+    <string name="app_pro">高级版</string>
+    <string name="app_about_app">说明</string>
+    <string name="main_search">搜</string>
+    <string name="main_searching">快速查询中</string>
+    <string name="alittle">感谢大家的使用，但是这里是空的。</string>
+    <string name="explain_msg">Magnet \n\n 软件不存储，发布资源链接，所有内容来自互联网，不对数据真实性负责，不承担责任。</string>
+    <string name="help_pro">请去Google play下载u磁力Pro,无广告, 0.99$。您也可以免费使用本软件</string>
+</resources>
