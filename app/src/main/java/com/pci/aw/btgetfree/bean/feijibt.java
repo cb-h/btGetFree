@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class feijibt implements Runnable {
 //http://feijibt.xyz/list/1080/2/0/0.html
+//    XXXX
     private String url = "http://feijibt.xyz/list/";
     private ArrayList list ;
     private String tag;

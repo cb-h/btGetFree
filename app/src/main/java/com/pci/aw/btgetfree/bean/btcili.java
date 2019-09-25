@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 
 public class btcili implements Runnable {
-
+//XXXXXXXXX
     private String url = "https://www.btcili.org/search/torrent/";
     private ArrayList list ;
     private String tag;

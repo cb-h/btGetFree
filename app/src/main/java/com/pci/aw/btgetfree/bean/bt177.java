@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 
 public class bt177 implements Runnable {
-
+//XXXXXXXX
     public static String url = "http://www.bt177.me/word/";
     private ArrayList list ;
     private String tag;

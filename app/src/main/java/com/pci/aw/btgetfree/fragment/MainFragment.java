@@ -9,15 +9,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -25,17 +28,16 @@ import com.pci.aw.btgetfree.BaseApplication;
 import com.pci.aw.btgetfree.R;
 import com.pci.aw.btgetfree.adapter.MainFragmentAdapter;
 import com.pci.aw.btgetfree.bean.BeanList;
-import com.pci.aw.btgetfree.bean.Btgat;
+import com.pci.aw.btgetfree.bean.ciliguo;
 import com.pci.aw.btgetfree.bean.bt177;
 import com.pci.aw.btgetfree.bean.feijibt;
 import com.pci.aw.btgetfree.bean.haidaowan;
-import com.pci.aw.btgetfree.bean.mttt;
+import com.pci.aw.btgetfree.bean.zhongziso;
 import com.pci.aw.btgetfree.utils.MyLog;
 import com.pci.aw.btgetfree.utils.MyUtils;
 
 
 import java.util.ArrayList;
-
 
 
 @SuppressLint("ValidFragment")
@@ -54,29 +56,45 @@ public class MainFragment extends BaseFragment {
     public String tag = "";
     private static boolean isGetMore = false;
     public static int page = 1;
-    public static ProgressDialog dialog ;
+    public static ProgressDialog dialog;
+    private Spinner spinner;
 
-    public MainFragment(){}
+    public MainFragment() {
+    }
+
     public MainFragment(Activity context) {
         this.context = context;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.main_fragment,container,false);
-        listView =  view.findViewById(R.id.main_list);
-        adapter = new MainFragmentAdapter(list,context);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.main_fragment, container, false);
+        listView = view.findViewById(R.id.main_list);
+        adapter = new MainFragmentAdapter(list, context);
         empty = view.findViewById(R.id.main_fragment_empty);
-        listView.setAdapter(adapter);
+        spinner = view.findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                MyLog.e(i + "");
+                BaseApplication.SP_set("url", i + "");
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinner.setSelection(Integer.valueOf(BaseApplication.SP_get("url")), true);
+        listView.setAdapter(adapter);
 
         //dialog
         dialog = new ProgressDialog(context);
         dialog.setMessage("Searching");
         dialog.setCancelable(true);
-        viewPager =  view.findViewById(R.id.main_viewPager);
-        search_bt =  view.findViewById(R.id.search_button);
-        search_edit =  view.findViewById(R.id.search_edit);
+        viewPager = view.findViewById(R.id.main_viewPager);
+        search_bt = view.findViewById(R.id.search_button);
+        search_edit = view.findViewById(R.id.search_edit);
         search_edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +102,19 @@ public class MainFragment extends BaseFragment {
                 search_bt.setClickable(true);
             }
         });
-
+        search_edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent event) {
+                if (i == KeyEvent.KEYCODE_ENTER){
+                    //执行两次该方法，按下和松开
+                    //松开的时候监听
+                    if (event.getAction() == KeyEvent.ACTION_UP){
+                        search_bt.performClick();
+                    }
+                }
+                return false;
+            }
+        });
         //进入之后先请求下获取权限
         // 如果api >= 23 需要显式申请权限
 //        if (Build.VERSION.SDK_INT >= 23) {
@@ -121,18 +151,18 @@ public class MainFragment extends BaseFragment {
                 listView.setEmptyView(empty);
                 ///收起软键盘
                 InputMethodManager manager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                manager.hideSoftInputFromWindow(context.getWindow().getDecorView().getWindowToken(),0);
+                manager.hideSoftInputFromWindow(context.getWindow().getDecorView().getWindowToken(), 0);
                 //隐藏ad
 //                adView.setVisibility(View.GONE);
                 tag = search_edit.getText().toString();
                 list.clear();
                 adapter.notifyDataSetChanged();
-                if (!TextUtils.isEmpty(tag)){
+                if (!TextUtils.isEmpty(tag)) {
 
-                    getList(tag,list,1);
+                    getList(tag, list, 1);
 
-                }else {
-                    Toast.makeText(context, R.string.app_need_input,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, R.string.app_need_input, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -145,18 +175,18 @@ public class MainFragment extends BaseFragment {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                MyLog.e("firstVisibleItem",""+firstVisibleItem);
-                MyLog.e("visibleItemCount",""+visibleItemCount);
-                MyLog.e("totalItemCount",""+totalItemCount);
-                if ( firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount!=0){
-                    MyLog.e("isGetMore",isGetMore+"  ");
-                    if( !isGetMore ){
+//                MyLog.e("firstVisibleItem",""+firstVisibleItem);
+//                MyLog.e("visibleItemCount",""+visibleItemCount);
+//                MyLog.e("totalItemCount",""+totalItemCount);
+                if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
+                    MyLog.e("isGetMore", isGetMore + "  ");
+                    if (!isGetMore) {
                         //加载更多
 
-                        isGetMore =true;
+                        isGetMore = true;
                         page++;
-                        if (TextUtils.isEmpty(tag))return;
-                        getList(tag,list,page);
+                        if (TextUtils.isEmpty(tag)) return;
+                        getList(tag, list, page);
 
 
                     }
@@ -168,15 +198,15 @@ public class MainFragment extends BaseFragment {
 
     }
 
-    public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults) {
-        switch (requestCode){
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
             case 1:
-                if (grantResults.length>0&&grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //这里已经获取到了摄像头的权限，想干嘛干嘛了可以
-                  //  newStartLighr();
-                }else {
+                    //  newStartLighr();
+                } else {
                     //这里是拒绝给APP摄像头权限，给个提示什么的说明一下都可以。
-                  //  Toast.makeText(MainActivity.this,"请手动打开相机权限",Toast.LENGTH_SHORT).show();
+                    //  Toast.makeText(MainActivity.this,"请手动打开相机权限",Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
@@ -187,64 +217,59 @@ public class MainFragment extends BaseFragment {
 
     /**
      * 加载数据
+     *
      * @param tag
      * @param list
      */
 
-    public void getList(String tag, ArrayList list,int page){
-        if (thread!=null&&thread.isAlive()){
+    public void getList(String tag, ArrayList list, int page) {
+        if (thread != null && thread.isAlive()) {
             thread.interrupt();
         }
         String url = BaseApplication.SP_get("url");
-        MyLog.e("---getList --- url--",url);
+        MyLog.e("---getList --- url--", url);
         dialog.show();
-        if ( TextUtils.isEmpty( url )){
 
-            thread = new Thread(new Btgat(tag,list,page));
-            thread.start();
-            BaseApplication.SP_set("url","0");
 
-        } else {
-
-            switch (url){
-                case "0":
-                    thread = new Thread(new Btgat(tag,list,page));
-                    break;
-                case "1":
-                    thread = new Thread(new feijibt(tag,list,page));
-                    break;
-                case "2":
-                    thread = new Thread(new bt177(tag,list,page));
-                    break;
-                case "3":
-                    thread = new Thread(new mttt(tag,list,page));
-                    break;
-                case "4":
-                    thread = new Thread(new haidaowan(tag,list,page));
-                    break;
-                default:
-                    break;
-            }
-            if (thread !=null)thread.start();
-
+        switch (url) {
+            case "0":
+                thread = new Thread(new zhongziso(tag, list, page));
+                break;
+            case "1":
+                thread = new Thread(new feijibt(tag, list, page));
+                break;
+            case "2":
+                thread = new Thread(new bt177(tag, list, page));
+                break;
+            case "3":
+                thread = new Thread(new ciliguo(tag, list, page));
+                break;
+            case "4":
+                thread = new Thread(new haidaowan(tag, list, page));
+                break;
+            default:
+                break;
         }
+        if (thread != null) thread.start();
+
+
     }
 
     @SuppressLint("HandlerLeak")
-    public static Handler handler = new Handler(){
+    public static Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (dialog.isShowing())dialog.dismiss();
+            if (dialog.isShowing()) dialog.dismiss();
             isGetMore = false;
             search_bt.setClickable(true);
-            switch (msg.what){
+            switch (msg.what) {
 
                 case 1:
                     adapter.notifyDataSetChanged();
                     break;
 
                 case 404:
-                    Toast.makeText(BaseApplication.context, R.string.app_err_to_changeLine,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BaseApplication.context, R.string.app_err_to_changeLine, Toast.LENGTH_SHORT).show();
                     MyUtils.toChangeUrlDialog(context);
                     break;
 

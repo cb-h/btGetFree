@@ -59,7 +59,7 @@ public class BaseApplication extends Application {
 
     public static String SP_get(String tag){
 
-        return sharedPreferences.getString(tag,"");
+        return sharedPreferences.getString(tag,"0");
 
     }
     public static void SP_set(String tag , String value){

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class bturl implements Runnable {
 //    https://www.bturl.so/search/1080_ctime_1.html
+//    XXXXXXXXX
     private String url = "https://www.bturl.so/search/";
     private ArrayList list ;
     private String tag;
