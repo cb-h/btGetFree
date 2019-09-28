@@ -29,9 +29,9 @@ import com.pci.aw.btgetfree.R;
 import com.pci.aw.btgetfree.adapter.MainFragmentAdapter;
 import com.pci.aw.btgetfree.bean.BeanList;
 import com.pci.aw.btgetfree.bean.ciliguo;
-import com.pci.aw.btgetfree.bean.bt177;
 import com.pci.aw.btgetfree.bean.cltt9;
 import com.pci.aw.btgetfree.bean.haidaowan;
+import com.pci.aw.btgetfree.bean.q5p;
 import com.pci.aw.btgetfree.bean.zhongziso;
 import com.pci.aw.btgetfree.utils.MyLog;
 import com.pci.aw.btgetfree.utils.MyUtils;
@@ -239,7 +239,7 @@ public class MainFragment extends BaseFragment {
                 thread = new Thread(new cltt9(tag, list, page));
                 break;
             case "2":
-                thread = new Thread(new cltt9(tag, list, page));
+                thread = new Thread(new q5p(tag, list, page));
                 break;
             case "3":
                 thread = new Thread(new ciliguo(tag, list, page));

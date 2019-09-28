@@ -15,15 +15,15 @@ import java.util.ArrayList;
 
 
 
-public class bt177 implements Runnable {
-//XXXXXXXX
-    public static String url = "http://www.bt177.me/word/";
+public class q5p implements Runnable {
+
+    public static String url = "http://cili.q5p.cc/plus/s/index.asp?keyword=";
     private ArrayList list ;
     private String tag;
     private int page;
-//    private MainFragment fragment;
 
-    public bt177(String tag,ArrayList list ,int page) {
+
+    public q5p(String tag, ArrayList list , int page) {
         this.tag = tag;
         this.list = list;
         this.page = page;
@@ -33,14 +33,15 @@ public class bt177 implements Runnable {
     @Override
     public void run() {
         try {
-            MyLog.e("bt177 running");
-            Document document= Jsoup.connect( url + tag + "_"+ page + ".html").timeout(10000).get();//10s的请求超时
-            Element ul = document.select("ul.mlist").first();
-            Elements es = ul.select("li");
+            MyLog.e("q5p running");
+            Document document= Jsoup.connect( url + tag + "&p="+ page).timeout(10000).get();//10s的请求超时
+            Elements es= document.select("div h2 a");
+
             for (Element e:es){
-                Element title = e.select("div.T1").first();
-
-
+                String title = e.text();
+                String msgUrl = e.attr("href");
+                MyLog.e(title);
+                MyLog.e(msgUrl);
             }
             Message message = new Message();
             message.what = 1;
