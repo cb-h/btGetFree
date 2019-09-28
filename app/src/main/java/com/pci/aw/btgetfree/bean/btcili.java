@@ -64,10 +64,7 @@ public class btcili implements Runnable {
 
                 BeanList bean = new BeanList();
                 bean.setTitle(s1);
-                bean.setOnlineplay(s2);
-                bean.setSize(s3);
-                bean.setCreattime(s4);
-                bean.setClicktime(s5);
+
                 bean.setHashcode(s6);
                 list.add(bean);
             }

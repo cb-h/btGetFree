@@ -69,10 +69,7 @@ public class ciliguo implements Runnable {
 
                 BeanList bean = new BeanList();
                 bean.setTitle(s1);
-                bean.setOnlineplay("");
-                bean.setSize(s3);
-                bean.setCreattime("");
-                bean.setClicktime("");
+
                 bean.setHashcode("");
                 list.add(bean);
             }

@@ -55,9 +55,7 @@ public class MainFragmentAdapter extends BaseAdapter {
         }
 
         holder.title.setText(list.get(position).getTitle());
-        holder.size.setText( list.get(position).getSize());
-        holder.creatTime.setText( list.get(position).getCreattime());
-        holder.clickTime.setText( list.get(position).getClicktime());
+
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,10 +64,7 @@ public class MainFragmentAdapter extends BaseAdapter {
                 Intent intent=new Intent(context, MainFragment_web_Activity.class);
                 intent.putExtra("hashcode",list.get(position).getHashcode());
                 intent.putExtra("title",list.get(position).getTitle());
-                intent.putExtra("size",list.get(position).getSize());
-                intent.putExtra("creattime",list.get(position).getCreattime());
-                intent.putExtra("clicktime",list.get(position).getClicktime());
-                intent.putExtra("onlineplay",list.get(position).getOnlineplay());
+
                 context.startActivity(intent);
             }
         });

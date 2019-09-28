@@ -67,10 +67,7 @@ public class bturl implements Runnable {
                 MyLog.e("msg  s6:",s6);
                 BeanList bean = new BeanList();
                 bean.setTitle(s1);
-                bean.setOnlineplay(s2);
-                bean.setSize(s3);
-                bean.setCreattime(s4);
-                bean.setClicktime(s5);
+
                 bean.setHashcode(s6);
                 list.add(bean);
             }
