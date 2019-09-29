@@ -25,7 +25,7 @@ import static com.pci.aw.btgetfree.BaseApplication.context;
 
 public class MainFragment_web_Activity extends AppCompatActivity {
 
-    public TextView titleView,margent,mySize,hot,time;
+    public TextView titleView,margent;
     public Button open , copy;
     public String hashcode;
     @SuppressLint("SetTextI18n")
@@ -44,25 +44,18 @@ public class MainFragment_web_Activity extends AppCompatActivity {
 
         titleView = (TextView) findViewById(R.id.main_title);
         margent = (TextView)findViewById(R.id.main_margent);
-        mySize = (TextView) findViewById(R.id.main_size);
-        hot = (TextView) findViewById(R.id.main_hot);
-        time = (TextView) findViewById(R.id.main_time);
         open = (Button) findViewById(R.id.main_open);
         copy = (Button) findViewById(R.id.main_copy);
 
         Intent intent = getIntent();
         hashcode = intent.getStringExtra("hashcode");
         String title = intent.getStringExtra("title");
-        String size = intent.getStringExtra("size");
-        String creattime = intent.getStringExtra("creattime");
-        String clicktime = intent.getStringExtra("clicktime");
+
         String onlineplay = intent.getStringExtra("onlineplay");
 
         titleView.setText( title);
         margent.setText(hashcode);
-        mySize.setText(size);
-        hot.setText(clicktime);
-        time.setText(creattime);
+
         copy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

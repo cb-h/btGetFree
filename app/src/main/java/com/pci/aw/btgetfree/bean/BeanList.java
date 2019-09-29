@@ -6,7 +6,6 @@ public class BeanList {
 
     public String hashcode;
     public String title;
-
     public String msgUrl;
 
 

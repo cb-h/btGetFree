@@ -64,7 +64,7 @@ public class MainFragmentAdapter extends BaseAdapter {
                 Intent intent=new Intent(context, MainFragment_web_Activity.class);
                 intent.putExtra("hashcode",list.get(position).getHashcode());
                 intent.putExtra("title",list.get(position).getTitle());
-
+                intent.putExtra("msgUrl",list.get(position).getMsgUrl());
                 context.startActivity(intent);
             }
         });

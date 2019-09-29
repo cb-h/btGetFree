@@ -47,7 +47,7 @@ public class ciliguo implements Runnable {
             MyLog.e(myurl);
 
             Document document= Jsoup.connect(myurl).timeout(10000).get();//10s的请求超时
-            Elements rs = document.select("div.card");
+            Elements rs = document.select("div.card-body");
             MyLog.e("~~~~~~~~~~~~~~~ ",rs.first().html());
 
             for (Element e:rs){

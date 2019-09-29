@@ -42,6 +42,11 @@ public class q5p implements Runnable {
                 String msgUrl = e.attr("href");
                 MyLog.e(title);
                 MyLog.e(msgUrl);
+                BeanList bean = new BeanList();
+                bean.setMsgUrl(msgUrl);
+                bean.setHashcode("");
+                bean.setTitle(title);
+                list.add(bean);
             }
             Message message = new Message();
             message.what = 1;

@@ -233,13 +233,13 @@ public class MainFragment extends BaseFragment {
 
         switch (url) {
             case "0":
-                thread = new Thread(new zhongziso(tag, list, page));
+                thread = new Thread(new q5p(tag, list, page));
                 break;
             case "1":
                 thread = new Thread(new cltt9(tag, list, page));
                 break;
             case "2":
-                thread = new Thread(new q5p(tag, list, page));
+                thread = new Thread(new zhongziso(tag, list, page));
                 break;
             case "3":
                 thread = new Thread(new ciliguo(tag, list, page));
